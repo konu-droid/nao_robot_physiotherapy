@@ -1,14 +1,10 @@
 from naoqi import ALProxy
 import time
 
-def recognize_name(NAO_IP, NAO_PORT):
+def recognize_name(tts: ALProxy, recog: ALProxy, memory: ALProxy):
     name_list = ["Claire", "Mohan", "Usamah", "Conah", "Jack"]
 
     try:
-        tts = ALProxy("ALTextToSpeech", NAO_IP, NAO_PORT)
-        recog = ALProxy("ALSpeechRecognition", NAO_IP, NAO_PORT)
-        memory = ALProxy("ALMemory", NAO_IP, NAO_PORT)
-
         recog.setLanguage("English")
         # Pause ASR engine before setting vocabulary
         recog.pause(True)
@@ -33,14 +29,10 @@ def recognize_name(NAO_IP, NAO_PORT):
         print("Error during name recognition", e)
         return None
     
-def get_knee_status(NAO_IP, NAO_PORT):
+def get_knee_status(tts: ALProxy, recog: ALProxy, memory: ALProxy):
     status_words = ["good", "okay", "sore", "painful", "better", "hurts", "bad"]
 
     try:
-        tts = ALProxy("ALTextToSpeech", NAO_IP, NAO_PORT)
-        recog = ALProxy("ALSpeechRecognition", NAO_IP, NAO_PORT)
-        memory = ALProxy("ALMemory", NAO_IP, NAO_PORT)
-
         recog.setLanguage("English")
         # Pause ASR engine before setting vocabulary
         recog.pause(True)
@@ -62,6 +54,34 @@ def get_knee_status(NAO_IP, NAO_PORT):
 
     except Exception as e:
         print("Error in knee status", e)
+        return None
+    
+def choose_exercise(tts: ALProxy, recog: ALProxy, memory: ALProxy):
+    
+    tts.say("Great, I have 4 exercises for you")
+    tts.say("1. Squats, 2. Leg raises, 3. Lunges, 4. Heel slides")
+    tts.say("Which exercise would you like to start with? Please say a number from 1 to 4")
+
+    vocab = ["one", "two", "three", "four"]
+    recog.setLanguage("English")
+    # Pause ASR engine before setting vocabulary
+    recog.pause(True)
+    recog.setVocabulary(vocab, False)
+    recog.pause(False)
+
+    recog.subscribe("ExerciseChoice")
+    time.sleep(5)
+    result = memory.getData("WordRecognized")
+    recog.unsubscribe("ExerciseChoice")
+    print(result)
+
+    if result[1] > 0.4:
+        spoken_number = result[0]
+        exercise_number = vocab.index(spoken_number) + 1
+        print("exercise_number: ", exercise_number)
+        return exercise_number
+    else:
+        tts.say("I didn't catch that, let's try again")
         return None
 
 # # testing code delete after use
