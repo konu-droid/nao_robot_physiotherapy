@@ -11,6 +11,6 @@ python robot_physiotherapist.py
 ``` 
 
 ### Exercise
-All the exercises are placed in exercises folder, to add a new exercise please edit both speech_functions.choose_exercise function as well as exercises.py file.
+All the exercises are placed in [exercises folder](exercises) folder, to add a new exercise please edit both [speech_functions](speech_functions.py) function as well as [logic](logic.py) file.
 
-Add your new exercise into the exercises folder and import it in exercises.py
+Add your new exercise into the [exercises folder](exercises) and import it in [logic](logic.py). An example for exercises would be [squat](exercises/squat.py)
