@@ -1,9 +1,7 @@
 from naoqi import ALProxy
 import time
 
-def wait_for_head_tap(NAO_IP, NAO_PORT):
-    tts = ALProxy("ALTextToSpeech", NAO_IP, NAO_PORT)
-    memory = ALProxy("ALMemory", NAO_IP, NAO_PORT)
+def wait_for_head_tap(tts, recog, memory):
     
     tts.say("If you are ready to start your A C L exercises, tap my head")
 

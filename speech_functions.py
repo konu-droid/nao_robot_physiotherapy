@@ -1,7 +1,7 @@
 from naoqi import ALProxy
 import time
 
-def recognize_name(tts: ALProxy, recog: ALProxy, memory: ALProxy):
+def recognize_name(tts, recog, memory):
     name_list = ["Claire", "Mohan", "Usamah", "Conah", "Jack"]
 
     try:
@@ -18,18 +18,18 @@ def recognize_name(tts: ALProxy, recog: ALProxy, memory: ALProxy):
         word = memory.getData("WordRecognized")
         recog.unsubscribe("NameRecognition")
 
-        if word[1] > 0.4:
+        if word[1] > 0.3:
             print(word)
             return word[0]
         else:
             tts.say("Sorry, I didn't catch that")
-            return None
+            return " "
 
     except Exception as e:
         print("Error during name recognition", e)
-        return None
+        return " "
     
-def get_knee_status(tts: ALProxy, recog: ALProxy, memory: ALProxy):
+def get_knee_status(tts, recog, memory):
     status_words = ["good", "okay", "sore", "painful", "better", "hurts", "bad"]
 
     try:
@@ -46,7 +46,7 @@ def get_knee_status(tts: ALProxy, recog: ALProxy, memory: ALProxy):
         word = memory.getData("WordRecognized")
         recog.unsubscribe("KneeStatus")
 
-        if word[1] > 0.4:
+        if word[1] > 0.3:
             return word[0]
         else:
             tts.say("I didn't quite hear that")
@@ -56,7 +56,7 @@ def get_knee_status(tts: ALProxy, recog: ALProxy, memory: ALProxy):
         print("Error in knee status", e)
         return None
     
-def choose_exercise(tts: ALProxy, recog: ALProxy, memory: ALProxy):
+def choose_exercise(tts, recog, memory):
     
     tts.say("Great, I have 4 exercises for you")
     tts.say("1. Squats, 2. Leg raises, 3. Lunges, 4. Heel slides")
@@ -75,13 +75,40 @@ def choose_exercise(tts: ALProxy, recog: ALProxy, memory: ALProxy):
     recog.unsubscribe("ExerciseChoice")
     print(result)
 
-    if result[1] > 0.4:
+    if result[1] > 0.3:
         spoken_number = result[0]
         exercise_number = vocab.index(spoken_number) + 1
         print("exercise_number: ", exercise_number)
         return exercise_number
     else:
         tts.say("I didn't catch that, let's try again")
+        return None
+    
+def get_end_feedback(tts, recog, memory):
+    status_words = ["good", "okay", "great", "awesome", "average", "bad"]
+
+    try:
+        recog.setLanguage("English")
+        # Pause ASR engine before setting vocabulary
+        recog.pause(True)
+        recog.setVocabulary(status_words, True)
+        recog.pause(False)
+
+        tts.say("That is the end of the exercises, how was the session today?")
+        recog.subscribe("endFeedback")
+        time.sleep(5)
+
+        word = memory.getData("WordRecognized")
+        recog.unsubscribe("endFeedback")
+
+        if word[1] > 0.3:
+            return word[0]
+        else:
+            tts.say("I didn't quite hear that")
+            return None
+
+    except Exception as e:
+        print("Error in knee status", e)
         return None
 
 # # testing code delete after use
