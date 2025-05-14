@@ -82,7 +82,7 @@ def choose_exercise(tts, recog, memory):
         return exercise_number
     else:
         tts.say("I didn't catch that, let's try again")
-        return None
+        return 1
     
 def get_end_feedback(tts, recog, memory):
     status_words = ["good", "okay", "great", "awesome", "average", "bad"]

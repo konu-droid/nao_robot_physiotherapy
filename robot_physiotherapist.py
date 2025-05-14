@@ -30,20 +30,19 @@ if __name__ == "__main__":
     wait_for_head_tap(tts, recog, memory) #function to ask if ready for exercise
     time.sleep(1)
 
+    # By default we start with first exercise
     exercise_number = choose_exercise(tts, recog, memory) #function to ask for exercise number
     
-    # By default we start with first exercise
-    selected_exercise = 1
     if exercise_number:
         exercises = ["Squats", "Leg raises", "Lunges", "Heel slides"]
-        selected_exercise = exercises[exercise_number - 1]
-        tts.say("You selected " + selected_exercise + "Let's get started")
+        selected_exercise_name = exercises[exercise_number - 1]
+        tts.say("You selected " + selected_exercise_name + "Let's get started")
     else:
         tts.say("Let's start with the first exercise")
 
     # add logic to perform all the actions one after the other
     # perform the exercise selected
-    perform_exercise(selected_exercise, patient_name, tts, recog, memory, motion, posture)
+    perform_exercise(exercise_number, patient_name, tts, recog, memory, motion, posture)
     # perform_exercise(1, "mohan", tts, recog, memory, motion, posture)
 
     feedback = get_end_feedback(tts, recog, memory)

@@ -111,7 +111,7 @@ def lunge(tts, recog, memory, motion):
     keys.append([[0.139552, [3, -0.0133333, 0], [3, 0.386667, 0]], [0.108872, [3, -0.386667, 0], [3, 0.4, 0]], [0.11961, [3, -0.4, -0.0107381], [3, 0.4, 0.0107381]], [0.205514, [3, -0.4, 0], [3, 0.4, 0]], [0.205514, [3, -0.4, 0], [3, 0.533333, 0]], [0.170232, [3, -0.533333, 0.00993451], [3, 0.4, -0.00745088]], [0.153358, [3, -0.4, 0], [3, 0.533333, 0]], [0.153358, [3, -0.533333, 0], [3, 0.666667, 0]], [0.141086, [3, -0.666667, 0], [3, 0, 0]]])
 
 
-    tts.say("Now we will do the lunge exercise. Get ready.")
+    tts.say("Now we will do the lunge exercise.")
     time.sleep(1)
 
     tts.say("First, stand with your feet shoulder width apart")
@@ -125,15 +125,10 @@ def lunge(tts, recog, memory, motion):
 
     tts.say("Now, lower your hips keeping your front foot flat on the ground and your back heel lifted")
     time.sleep(1)
-    tts.say("Make sure your front thigh is parallel to the ground and your back knee points to the floor creating a ninety degree angle with each knee")
-    time.sleep(1)
 
     tts.say("This is how it should look")
 
     motion.angleInterpolationBezier(names, times, keys)
-    
-    # following_lunge = follow_lunge(tts, recog, memory, motion) #function to ask if user followed lunge movement
-    # time.sleep(3)
 
     tts.say("Finally, push yourself back up to the starting position focusing your weight on the heel of your front foot")
 

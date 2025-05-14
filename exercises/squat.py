@@ -116,7 +116,16 @@ def squat(tts, recog, memory, motion):
     tts.say("Now we will do the sqaut exercise. Get ready.")
 
     time.sleep(1.0)
-    tts.say("Feet shoulder-width, chest up. Hips back, knees over toes, weight in heels to lower. Squat to depth with neutral spine, core tight. Push through heels to stand, squeeze glutes.")
+    tts.say("Feet shoulder-width, chest up.")
+
+    time.sleep(0.5)
+    tts.say("Hips back, knees over toes, weight in heels to lower.")
+
+    time.sleep(0.5)
+    tts.say("Squat to depth with neutral spine, core tight.")
+
+    time.sleep(0.5)
+    tts.say("Push through heels to stand, squeeze glutes.")
 
     time.sleep(1.5)
     tts.say("Now, Let me show you how its done")

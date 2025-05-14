@@ -121,7 +121,7 @@ def heel_slide(tts, motion, posture):
     tts.say("Oh boy, I am getting too old for this")
 
     time.sleep(1.5)
-    tts.say("Okay now let us try to do the heel slide, watch me and follow")
+    tts.say("Okay now lets do the heel slide, watch me and follow")
 
     time.sleep(1.0)
     tts.say("Do this only with your torn A C L leg")

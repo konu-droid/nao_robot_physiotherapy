@@ -111,11 +111,8 @@ def side_lunge(tts, recog, memory, motion):
     times.append([0, 3.96, 6])
     keys.append([[0.0183661, [3, -0.0133333, 0], [3, 1.32, 0]], [0.0199001, [3, -1.32, -0.00153397], [3, 0.68, 0.000790227]], [0.049046, [3, -0.68, 0], [3, 0, 0]]])
 
-    tts.say("Now we will do the side lunge exercise. Get ready.")
+    tts.say("Now we will do the side lunge exercise.")
     tts.say("Slowly shift your weight to the side.")
-
-    # motion.angleInterpolation(names, keys, times, True)
-    motion.angleInterpolationBezier(names, times, keys)
 
     time.sleep(0.5)
     tts.say("Watch your balance.")
@@ -125,6 +122,9 @@ def side_lunge(tts, recog, memory, motion):
 
     time.sleep(1.2)
     tts.say("Now back up.")
+
+    # motion.angleInterpolation(names, keys, times, True)
+    motion.angleInterpolationBezier(names, times, keys)
 
     time.sleep(1.5)
     tts.say("Well done! That was a strong side lunge.")
